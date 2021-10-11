@@ -1,0 +1,49 @@
+@startuml erd
+
+title ER Diagram : Twitter clone API
+
+/''''''''''''''''''''''''''''''''''''''''/
+/'''''''''' TABLE '''''''''''''''''''''''/
+/''''''''''''''''''''''''''''''''''''''''/
+
+/''
+ ' PK : +
+ ' FK : #
+ ' Unique : *
+ '/
+
+entity "users" {
+  + id : BIGINT [PK]
+  --
+  * name : VARCHAR(32)
+  * email : VARCHAR(256)
+  email_verified_at : TIMESTAMP
+  password : VARCHAR(64)
+  remember_token : VARCHAR
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "tweets" {
+  + id : BIGINT [PK]
+  --
+  # user_id : BIGINT [FK(users,id)]
+  content : VARCHAR(140)
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "likes" {
+  # user_id : BIGINT [FK(users,id)]
+  # tweet_id : BIGINT [FK(tweets,id)]
+}
+
+/''''''''''''''''''''''''''''''''''''''''/
+/'''''''''' RELATION ''''''''''''''''''''/
+/''''''''''''''''''''''''''''''''''''''''/
+
+users ||--o{ tweets
+users ||--o{ likes
+tweets ||--o{ likes
+
+@enduml
