@@ -32,11 +32,15 @@ class LoginRequest extends FormRequest
         ];
     }
 
-
-    protected function failedValidation(Validator $validator)
+    /**
+     * @param Validator $validator
+     *
+     * @return Response
+     */
+    protected function failedValidation(Validator $validator): Response
     {
         $res = response()->json([
-            'status' => Response::HTTP_BAD_REQUEST,
+            'result' => false,
             'errors' => $validator->errors(),
         ], Response::HTTP_BAD_REQUEST);
 
