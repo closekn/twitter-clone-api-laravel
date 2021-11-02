@@ -19,3 +19,7 @@ $ ./vendor/bin/sail artisan key:generate
 ```
 
 [localhost:80](http://localhost:80) で確認
+
+## API仕様
+
+https://closekn.github.io/twitter-clone-api-laravel/
