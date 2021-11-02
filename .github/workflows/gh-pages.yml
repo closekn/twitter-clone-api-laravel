@@ -1,14 +1,12 @@
 name: github pages
 
 on:
-  branch
-push:
-  branches: [ main ]
-  paths:
-    - './.docs/swagger/*'
+  push:
+    branches: [ main ]
+    paths:
+      - './.docs/swagger/*'
 
-# 手動実行できるようにするため
-workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   deploy:
