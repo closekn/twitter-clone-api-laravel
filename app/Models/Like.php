@@ -9,6 +9,12 @@ class Like extends Model
 {
     use HasFactory;
 
+    protected $table = 'likes';
+
+    protected $primaryKey = ['user_id', 'message_id'];
+
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,4 +24,6 @@ class Like extends Model
         'user_id',
         'tweet_id',
     ];
+
+    public $timestamps = false;
 }
