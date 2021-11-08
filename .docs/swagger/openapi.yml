@@ -378,7 +378,7 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/result'
-        tweet:
+        user:
           $ref: '#/components/schemas/user'
       required:
         - result
