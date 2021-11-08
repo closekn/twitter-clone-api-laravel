@@ -255,7 +255,7 @@ components:
       format: date-time
     # オブジェクト
     user:
-      description: ツイート詳細
+      description: ユーザ詳細
       type: object
       properties:
         user_id:
@@ -378,7 +378,7 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/result'
-        tweet:
+        user:
           $ref: '#/components/schemas/user'
       required:
         - result
