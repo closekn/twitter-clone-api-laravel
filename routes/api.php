@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\TweetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -25,6 +26,8 @@ Route::get('/users/{user}', [UserController::class, 'show']);
 
 Route::get('/tweets', [TweetController::class, 'index']);
 Route::post('/tweets', [TweetController::class, 'store'])->middleware('auth:sanctum');
+
+Route::post('/like', [LikeController::class, 'store'])->middleware('auth:sanctum');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
