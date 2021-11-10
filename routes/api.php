@@ -28,6 +28,7 @@ Route::get('/tweets', [TweetController::class, 'index']);
 Route::post('/tweets', [TweetController::class, 'store'])->middleware('auth:sanctum');
 
 Route::post('/like', [LikeController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('/like', [LikeController::class, 'destroy'])->middleware('auth:sanctum');
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
