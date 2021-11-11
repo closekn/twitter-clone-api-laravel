@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,6 +50,14 @@ class Handler extends ExceptionHandler
                 'result' => false,
                 'message' => $exception->getMessage(),
             ], Response::HTTP_BAD_REQUEST);
+        }
+
+        // 404
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'result' => false,
+                'message' => 'The specified id does not exist.',
+            ], Response::HTTP_NOT_FOUND);
         }
 
         return parent::render($request, $exception);
