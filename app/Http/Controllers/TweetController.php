@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Tweet\StoreRequest;
 use App\Http\Resources\Tweet\IndexResource;
 use App\Http\Resources\Tweet\StoreResource;
+use App\Http\Resources\Tweet\ShowResource;
+use App\Models\Tweet;
 use App\UseCases\Tweet\IndexAction;
+use App\UseCases\Tweet\ShowAction;
 use App\UseCases\Tweet\StoreAction;
 use Illuminate\Http\Request;
 
@@ -36,5 +39,16 @@ class TweetController extends Controller
                 $request->content
             )
         );
+    }
+
+    /**
+     * @param Tweet $tweet
+     * @param ShowAction $action
+     *
+     * @return ShowResource
+     */
+    public function show(Tweet $tweet, ShowAction $action): ShowResource
+    {
+        return new ShowResource($action($tweet));
     }
 }

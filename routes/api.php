@@ -26,6 +26,7 @@ Route::get('/users/{user}', [UserController::class, 'show']);
 
 Route::get('/tweets', [TweetController::class, 'index']);
 Route::post('/tweets', [TweetController::class, 'store'])->middleware('auth:sanctum');
+Route::get('/tweets/{tweet}', [TweetController::class, 'show']);
 
 Route::post('/like', [LikeController::class, 'store'])->middleware('auth:sanctum');
 Route::delete('/like', [LikeController::class, 'destroy'])->middleware('auth:sanctum');
