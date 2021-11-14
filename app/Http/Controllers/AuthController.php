@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\Auth\RegisterResource;
 use App\Models\User;
+use App\UseCases\Auth\RegisterAction;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -14,19 +15,15 @@ class AuthController extends Controller
     /**
      * @param RegisterRequest $request
      *
-     * @return Response
+     * @return RegisterResource
      */
-    public function register(RegisterRequest $request): Response
+    public function register(RegisterRequest $request, RegisterAction $action): RegisterResource
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        return response()->json([
-            'result' => true
-        ], Response::HTTP_OK);
+        return new RegisterResource(
+            $action(
+                (object) $request->validated()
+            )
+        );
     }
 
     /**
