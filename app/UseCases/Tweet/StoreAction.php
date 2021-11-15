@@ -9,11 +9,14 @@ use App\Models\User;
 
 class StoreAction
 {
-    public function __invoke(User $user, String $content): Tweet
+    public function __invoke(User $user, object $request): Tweet
     {
+        assert($user->exists);
+        assert($request->exists);
+
         $tweet = Tweet::create([
             'user_id' => $user->id,
-            'content' => $content,
+            'content' => $request->content,
         ]);
 
         return $tweet;

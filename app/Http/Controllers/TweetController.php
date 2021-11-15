@@ -18,28 +18,29 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 class TweetController extends Controller
 {
     /**
-     * @param Request $request
      * @param IndexAction $action
      *
-     * @return
+     * @return IndexResource
      */
-    public function index(Request $request, IndexAction $action)
+    public function index(IndexAction $action): IndexResource
     {
-        return new IndexResource($action());
+        return new IndexResource(
+            $action(),
+        );
     }
 
     /**
      * @param StoreRequest $request
      * @param StoreAction $action
      *
-     * @return
+     * @return StoreResource
      */
-    public function store(StoreRequest $request, StoreAction $action)
+    public function store(StoreRequest $request, StoreAction $action): StoreResource
     {
         return new StoreResource(
             $action(
                 $request->user(),
-                $request->content
+                (object) $request->validated(),
             )
         );
     }
@@ -52,7 +53,11 @@ class TweetController extends Controller
      */
     public function show(Tweet $tweet, ShowAction $action): ShowResource
     {
-        return new ShowResource($action($tweet));
+        return new ShowResource(
+            $action(
+                $tweet,
+            )
+        );
     }
 
     /**
