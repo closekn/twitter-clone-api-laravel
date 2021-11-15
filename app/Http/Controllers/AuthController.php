@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\Auth\LoginResource;
 use App\Http\Resources\Auth\RegisterResource;
-use App\Models\User;
+use App\UseCases\Auth\LoginAction;
 use App\UseCases\Auth\RegisterAction;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class AuthController extends Controller
 {
     /**
      * @param RegisterRequest $request
+     * @param RegisterAction $action
      *
      * @return RegisterResource
      */
@@ -28,27 +29,20 @@ class AuthController extends Controller
 
     /**
      * @param LoginRequest $request
+     * @param LoginAction $action
      *
-     * @return Response
+     * @return LoginResource
      */
-    public function login(LoginRequest $request): Response
+    public function login(LoginRequest $request, LoginAction $action): LoginResource
     {
-        $credentials = $request->validated();
-
-        if (Auth::attempt($credentials)){
-            $user = User::whereName($request->name)->first();
-
-            $user->tokens()->delete();
-            $token = $user->createToken("login:user{$user->id}")->plainTextToken;
-
-            return response()->json([
-                'result' => true,
-                'token' => $token
-            ], Response::HTTP_OK);
+        try {
+            return new LoginResource(
+                $action(
+                    (object) $request->validated(),
+                )
+            );
+        } catch (BadRequestException $e) {
+            throw $e;
         }
-
-        return response()->json([
-            'result' => false,
-        ], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
