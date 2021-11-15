@@ -29,7 +29,7 @@ class LikeController extends Controller
                 )
             );
         } catch (BadRequestException $e) {
-            throw new BadRequestException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -49,7 +49,7 @@ class LikeController extends Controller
                 )
             );
         } catch (BadRequestException $e) {
-            throw new BadRequestException($e->getMessage());
+            throw $e;
         }
     }
 }
