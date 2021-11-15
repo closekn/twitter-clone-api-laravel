@@ -33,7 +33,15 @@ class GetTweetsTest extends TestCase
             ])
             ->assertJsonStructure([
                 'result',
-                'tweets'
+                'tweets' => [
+                    '*' => [
+                        'tweet_id',
+                        'user_name',
+                        'content',
+                        'count_likes',
+                        'date',
+                    ],
+                ],
             ]);
     }
 

@@ -44,7 +44,12 @@ class GetTweetsTweetidTest extends TestCase
                     'tweet_id',
                     'user_name',
                     'content',
-                    'liked_users',
+                    'liked_users' => [
+                        '*' => [
+                            'user_id',
+                            'user_name',
+                        ],
+                    ],
                     'date',
                 ],
             ]);
