@@ -64,9 +64,10 @@ class LoginTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(500)
+            ->assertStatus(400)
             ->assertExactJson([
                 'result' => false,
+                'message' => '\'name\' or \'password\' is wrong.',
             ]);
     }
 
@@ -83,9 +84,10 @@ class LoginTest extends TestCase
         ]);
 
         $response
-            ->assertStatus(500)
+            ->assertStatus(400)
             ->assertExactJson([
                 'result' => false,
+                'message' => '\'name\' or \'password\' is wrong.',
             ]);
     }
 
