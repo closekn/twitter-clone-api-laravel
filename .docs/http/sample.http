@@ -1,0 +1,66 @@
+@path = http://localhost:80/api
+@token = Bearer XXXXXXXX
+
+#-- Auth --#
+### register
+POST {{path}}/register HTTP/1.1
+content-type: application/json
+
+{
+    "name":"hoge",
+    "email":"hoge@example.com",
+    "password":"hogehoge"
+}
+
+### login
+POST {{path}}/login HTTP/1.1
+content-type: application/json
+
+{
+    "name":"hoge",
+    "password":"hogehoge"
+}
+
+
+#-- Tweet --#
+### index
+GET {{path}}/tweets HTTP/1.1
+
+### store
+POST {{path}}/tweets HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "content":"Hello! This is a new Tweet!!"
+}
+
+### show
+GET {{path}}/tweets/1 HTTP/1.1
+
+### destroy
+DELETE {{path}}/tweets/1 HTTP/1.1
+Authorization: {{token}}
+
+#-- User --#
+### show
+GET {{path}}/users/6 HTTP/1.1
+
+#-- Like --#
+### store
+POST {{path}}/like HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "tweet_id":1
+}
+
+### destroy
+DELETE {{path}}/like HTTP/1.1
+content-type: application/json
+Authorization: {{token}}
+
+{
+    "tweet_id":1
+}
