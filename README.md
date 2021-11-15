@@ -1,5 +1,7 @@
 # Twitter clone API
 
+ゆめみインターン課題で色々試してみる
+
 ## Set Up
 
 ```sh
@@ -16,10 +18,26 @@ $ docker run --rm \
 $ ./vendor/bin/sail up -d
 # APP_KEY 作成
 $ ./vendor/bin/sail artisan key:generate
+# マイグレーション&シーディング
+$ ./vendor/bin/sail artisan migrate:fresh --seed
 ```
 
 [localhost:80](http://localhost:80) で確認
 
 ## API仕様
 
-https://closekn.github.io/twitter-clone-api-laravel/
+- API仕様
+    - https://closekn.github.io/twitter-clone-api-laravel/
+- 実行サンプル
+    - [.docs/http/sample.http](.docs/http/sample.http)
+
+## 開発
+
+- ブランチルール
+    - GitHub Flow
+- API設計
+    - RESTをベースに
+- コード設計
+    - 参考 : https://zenn.dev/mpyw/articles/ce7d09eb6d8117
+- 開発
+    - TDD (できるだけ)

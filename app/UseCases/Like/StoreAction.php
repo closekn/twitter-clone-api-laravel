@@ -11,9 +11,12 @@ use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class StoreAction
 {
-    public function __invoke(User $user, Int $tweet_id): Like
+    public function __invoke(User $user, object $request): Like
     {
-        $tweet = Tweet::find($tweet_id);
+        assert($user->exists);
+        assert($request->exists);
+
+        $tweet = Tweet::find($request->tweet_id);
 
         if ($tweet->isLiked($user)) {
             throw new BadRequestException('The tweet with the tweet_id has already been liked.');

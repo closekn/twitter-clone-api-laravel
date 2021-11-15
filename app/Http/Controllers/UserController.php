@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
 use App\UseCases\User\ShowAction;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -17,6 +16,10 @@ class UserController extends Controller
      */
     public function show(User $user, ShowAction $action): ShowResource
     {
-        return new ShowResource($action($user));
+        return new ShowResource(
+            $action(
+                $user,
+            )
+        );
     }
 }

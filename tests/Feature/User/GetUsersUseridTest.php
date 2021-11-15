@@ -43,8 +43,24 @@ class GetUsersUseridTest extends TestCase
                 'user' => [
                     'user_id',
                     'user_name',
-                    'tweets',
-                    'liked_tweets'
+                    'tweets' => [
+                        '*' => [
+                            'tweet_id',
+                            'user_name',
+                            'content',
+                            'count_likes',
+                            'date',
+                        ],
+                    ],
+                    'liked_tweets' => [
+                        '*' => [
+                            'tweet_id',
+                            'user_name',
+                            'content',
+                            'count_likes',
+                            'date',
+                        ],
+                    ],
                 ]
             ]);
     }

@@ -13,6 +13,9 @@ class DestroyAction
 {
     public function __invoke(User $user, Tweet $tweet)
     {
+        assert($user->exists);
+        assert($tweet->exists);
+
         if ($user->id !== $tweet->user_id) {
             throw new BadRequestException('The tweet with the tweet_id is not owned by the login user.');
         }

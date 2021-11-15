@@ -11,6 +11,8 @@ class ShowAction
 {
     public function __invoke(Tweet $tweet): Tweet
     {
+        assert($tweet->exists);
+
         return $tweet;
     }
 }

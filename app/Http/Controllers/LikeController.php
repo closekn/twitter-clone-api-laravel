@@ -8,7 +8,6 @@ use App\Http\Resources\Like\DestroyResource;
 use App\Http\Resources\Like\StoreResource;
 use App\UseCases\Like\DestroyAction;
 use App\UseCases\Like\StoreAction;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class LikeController extends Controller
@@ -25,11 +24,11 @@ class LikeController extends Controller
             return new StoreResource(
                 $action(
                     $request->user(),
-                    $request->tweet_id,
+                    (object) $request->validated(),
                 )
             );
         } catch (BadRequestException $e) {
-            throw new BadRequestException($e->getMessage());
+            throw $e;
         }
     }
 
@@ -45,11 +44,11 @@ class LikeController extends Controller
             return new DestroyResource(
                 $action(
                     $request->user(),
-                    $request->tweet_id,
+                    (object) $request->validated(),
                 )
             );
         } catch (BadRequestException $e) {
-            throw new BadRequestException($e->getMessage());
+            throw $e;
         }
     }
 }
